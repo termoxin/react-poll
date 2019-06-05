@@ -4,11 +4,18 @@ import styled from "styled-components";
 
 const StyledRadio = styled(Radio)`
   && label {
-    color: ${props => (props.status ? "#10d410" : "")};
+    color: ${props => (props.status && props.showCorrect ? "#10d410" : "")};
   }
 `;
 
-const Radios = ({ answers, value, handleChange, status, disabled }) => {
+const Radios = ({
+  answers,
+  value,
+  handleChange,
+  status,
+  disabled,
+  showCorrect = false
+}) => {
   return (
     <>
       {answers.map(answer => (
@@ -19,6 +26,7 @@ const Radios = ({ answers, value, handleChange, status, disabled }) => {
               label={answer.text}
               name="answer"
               value={answer.text}
+              showCorrect={showCorrect}
               checked={value === answer.text}
               onChange={handleChange}
             />
@@ -28,6 +36,7 @@ const Radios = ({ answers, value, handleChange, status, disabled }) => {
               label={answer.text}
               name="answer"
               value={answer.text}
+              showCorrect={showCorrect}
               checked={value === answer.text}
               onChange={handleChange}
             />

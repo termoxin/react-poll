@@ -5,12 +5,14 @@ import { Input } from "semantic-ui-react";
 const StyledInput = styled(Input)`
   align-self: stretch;
   border-radius: 5px;
-  border: ${props => (props.status ? "1px solid #10d4108a" : undefined)};
+  border: ${props =>
+    props.status && props.showCorrect ? "1px solid #10d4108a" : undefined};
 `;
 
-const Fill = ({ handleChange, status }) => (
+const Fill = ({ handleChange, status, showCorrect = false }) => (
   <>
     <StyledInput
+      showCorrect={showCorrect}
       status={status}
       placeholder="Type your answer here"
       onChange={handleChange}

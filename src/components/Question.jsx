@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import { Form, Card, Icon, Radio, Button } from "semantic-ui-react";
 import styled from "styled-components";
-import Radios from "./Radios";
-import Checks from "./Checks";
-import Fill from "./Fill";
+import QuestionType from "./QuestionType";
 
 const ButtonContent = styled(Card.Content)`
   display: flex;
@@ -38,8 +36,6 @@ class Question extends Component {
     const { type } = this.props;
     const { status } = this.state;
 
-    console.log(type, status);
-
     if (type === "radio" && status) {
       this.setState({
         status: false
@@ -58,63 +54,34 @@ class Question extends Component {
   };
 
   handleCheckAnswer = () => {
-    this.setState({
-      disabled: true
-    });
-
     const { correctAnswer, type } = this.props;
     const { value } = this.state;
+
     if (type === "fill" || type === "radio") {
       const status = value.toLowerCase() === correctAnswer.toLowerCase();
       this.setState({
         status
       });
     }
+
     if (type === "checkbox") {
-      const isCorrect = Object.keys(value).every(
-        a => correctAnswer.indexOf(a) > -1
-      );
-      console.log(isCorrect);
+      const currentAnswer = Object.keys(value).filter(answer => value[answer]);
+
+      const isCorrect = currentAnswer.every(a => correctAnswer.indexOf(a) > -1);
+
+      this.setState({
+        status: isCorrect
+      });
     }
+
+    this.setState({
+      disabled: true
+    });
   };
 
   render() {
-    const { text, description, answers, type } = this.props;
+    const { text, description, answers, type, correctAnswer } = this.props;
     const { value, status, disabled } = this.state;
-
-    const QuestionType = () => {
-      if (type === "checkbox") {
-        return (
-          <Checks
-            answers={answers}
-            value={value}
-            status={status ? status : undefined}
-            handleChange={this.handleChange}
-          />
-        );
-      }
-
-      if (type === "radio") {
-        return (
-          <Radios
-            answers={answers}
-            value={value}
-            status={status ? status : undefined}
-            disabled={disabled}
-            handleChange={this.handleChange}
-          />
-        );
-      }
-
-      if (type === "fill") {
-        return (
-          <Fill
-            handleChange={this.handleChange}
-            status={status ? status : undefined}
-          />
-        );
-      }
-    };
 
     return (
       <StyledCard>
@@ -127,7 +94,16 @@ class Question extends Component {
           </Card.Description>
         </Card.Content>
         <Card.Content>
-          <StyledForm>{QuestionType()}</StyledForm>
+          answers, value, status, correctAnswer, handleChange
+          <StyledForm>
+            <QuestionType
+              type={type}
+              value={value}
+              status={status}
+              correctAnswer={correctAnswer}
+              handleChange={this.handleChange}
+            />
+          </StyledForm>
         </Card.Content>
         <ButtonContent>
           <Button
