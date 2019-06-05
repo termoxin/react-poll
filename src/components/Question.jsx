@@ -94,11 +94,11 @@ class Question extends Component {
           </Card.Description>
         </Card.Content>
         <Card.Content>
-          answers, value, status, correctAnswer, handleChange
           <StyledForm>
             <QuestionType
               type={type}
               value={value}
+              answers={answers}
               status={status}
               correctAnswer={correctAnswer}
               handleChange={this.handleChange}

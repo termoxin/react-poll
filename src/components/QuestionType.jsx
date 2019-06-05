@@ -3,17 +3,19 @@ import Radios from "./Radios";
 import Checks from "./Checks";
 import Fill from "./Fill";
 
-const QuestionType = ({ status, type, ...others }) => {
+const QuestionType = ({ status, type, ...rest }) => {
+  const validatedStatus = status ? status : undefined;
+
   if (type === "checkbox") {
-    return <Checks {...others} status={status ? status : undefined} />;
+    return <Checks {...rest} status={validatedStatus} />;
   }
 
   if (type === "radio") {
-    return <Radios {...others} status={status ? status : undefined} />;
+    return <Radios {...rest} status={validatedStatus} />;
   }
 
   if (type === "fill") {
-    return <Fill status={status ? status : undefined} />;
+    return <Fill {...rest} status={validatedStatus} />;
   }
 };
 
