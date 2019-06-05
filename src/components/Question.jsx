@@ -29,12 +29,22 @@ class Question extends Component {
 
     this.state = {
       value: "",
-      status: null
+      status: null,
+      disabled: false
     };
   }
 
   handleChange = (e, { value, checked }) => {
     const { type } = this.props;
+    const { status } = this.state;
+
+    console.log(type, status);
+
+    if (type === "radio" && status) {
+      this.setState({
+        status: false
+      });
+    }
 
     if (type === "checkbox") {
       this.setState({
@@ -48,25 +58,29 @@ class Question extends Component {
   };
 
   handleCheckAnswer = () => {
+    this.setState({
+      disabled: true
+    });
+
     const { correctAnswer, type } = this.props;
     const { value } = this.state;
-
     if (type === "fill" || type === "radio") {
       const status = value.toLowerCase() === correctAnswer.toLowerCase();
-
       this.setState({
         status
       });
     }
-
     if (type === "checkbox") {
-      console.log(value, correctAnswer);
+      const isCorrect = Object.keys(value).every(
+        a => correctAnswer.indexOf(a) > -1
+      );
+      console.log(isCorrect);
     }
   };
 
   render() {
     const { text, description, answers, type } = this.props;
-    const { value, status } = this.state;
+    const { value, status, disabled } = this.state;
 
     const QuestionType = () => {
       if (type === "checkbox") {
@@ -74,7 +88,7 @@ class Question extends Component {
           <Checks
             answers={answers}
             value={value}
-            status={status}
+            status={status ? status : undefined}
             handleChange={this.handleChange}
           />
         );
@@ -85,14 +99,20 @@ class Question extends Component {
           <Radios
             answers={answers}
             value={value}
-            status={status}
+            status={status ? status : undefined}
+            disabled={disabled}
             handleChange={this.handleChange}
           />
         );
       }
 
       if (type === "fill") {
-        return <Fill handleChange={this.handleChange} status={status} />;
+        return (
+          <Fill
+            handleChange={this.handleChange}
+            status={status ? status : undefined}
+          />
+        );
       }
     };
 
@@ -110,7 +130,11 @@ class Question extends Component {
           <StyledForm>{QuestionType()}</StyledForm>
         </Card.Content>
         <ButtonContent>
-          <Button secondary onClick={this.handleCheckAnswer}>
+          <Button
+            secondary
+            onClick={this.handleCheckAnswer}
+            disabled={disabled}
+          >
             Ok
           </Button>
         </ButtonContent>
