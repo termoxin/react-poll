@@ -6,5 +6,10 @@
     "es6": true,
     "mocha": true
   },
-  "rules": {}
+  "rules": {
+    "react/jsx-filename-extension": [
+      1,
+      { "extensions": [".js", ".jsx", "tsx"] }
+    ]
+  }
 }

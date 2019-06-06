@@ -28,8 +28,8 @@ const render = Component => {
 
 render(App);
 
-if (module.hot) {
-  module.hot.accept("./App", () => {
+if ((module as any ).hot) {
+  (module as any ).hot.accept("./App", () => {
     render(App);
   });
 }

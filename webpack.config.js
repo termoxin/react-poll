@@ -28,7 +28,7 @@ module.exports = {
     "@babel/polyfill",
     "whatwg-fetch",
     "react-hot-loader/patch",
-    path.join(__dirname, "/src/index.jsx")
+    path.join(__dirname, "/src/index.tsx")
   ],
   module: {
     rules: [
@@ -37,6 +37,7 @@ module.exports = {
         exclude: /node_modules/,
         loaders: ["babel-loader"]
       },
+      { test: /\.tsx?$/, loader: "awesome-typescript-loader" },
       {
         test: /\.s(a|c)ss$/,
         loader: "style-loader!css-loader!sass-loader"
@@ -55,7 +56,7 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: [".js", ".jsx"]
+    extensions: [".js", ".jsx", ".tsx", ".ts"]
   },
   output: {
     filename: "index.js",
