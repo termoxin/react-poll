@@ -54,8 +54,8 @@ class Question extends Component {
   };
 
   handleCheckAnswer = () => {
-    const { correctAnswer, type } = this.props;
-    const { value } = this.state;
+    const { correctAnswer, type, handleChecking, text } = this.props;
+    const { value, status } = this.state;
 
     if (type === "fill" || type === "radio") {
       const status = value.toLowerCase() === correctAnswer.toLowerCase();
@@ -67,16 +67,25 @@ class Question extends Component {
     if (type === "checkbox") {
       const currentAnswer = Object.keys(value).filter(answer => value[answer]);
 
-      const isCorrect = currentAnswer.every(a => correctAnswer.indexOf(a) > -1);
+      if (currentAnswer.length !== correctAnswer.length) {
+        this.setState({ status: false });
+      } else {
+        const isCorrect = currentAnswer.every(
+          a => correctAnswer.indexOf(a) > -1
+        );
 
-      this.setState({
-        status: isCorrect
-      });
+        this.setState({
+          status: isCorrect
+        });
+      }
     }
 
-    this.setState({
-      disabled: true
-    });
+    this.setState(
+      {
+        disabled: true
+      },
+      () => handleChecking(this.state.status, text)
+    );
   };
 
   render() {

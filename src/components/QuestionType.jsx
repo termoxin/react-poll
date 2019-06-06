@@ -4,7 +4,7 @@ import Checks from "./Checks";
 import Fill from "./Fill";
 
 const QuestionType = ({ status, type, ...rest }) => {
-  const validatedStatus = status ? status : undefined;
+  const validatedStatus = status ? status.toString() : undefined;
 
   if (type === "checkbox") {
     return <Checks {...rest} status={validatedStatus} />;
