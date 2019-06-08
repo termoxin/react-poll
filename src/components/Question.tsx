@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Form, Card, Icon, Radio, Button } from "semantic-ui-react";
 import styled from "styled-components";
 import QuestionType from "./QuestionType";
+import merge from "../helpers/merge";
 
 const ButtonContent = styled(Card.Content)`
   display: flex;
@@ -21,12 +22,33 @@ const StyledForm = styled(Form)`
   align-items: flex-start;
 `;
 
-class Question extends Component {
+interface Props {
+  answers: Array<object>;
+  correctAnswer: string;
+  handleChecking: Function;
+  id: number | string;
+  text: string;
+  type: string;
+  description: string;
+  handleChange: Function;
+}
+
+interface State {
+  inputValue: string | object;
+  status: boolean;
+  disabled?: boolean;
+}
+
+class Question extends Component<Props, State> {
+  static defaultProps: { type: string } = {
+    type: "fill"
+  };
+
   constructor(props) {
     super(props);
 
     this.state = {
-      value: "",
+      inputValue: "",
       status: null,
       disabled: false
     };
@@ -34,7 +56,7 @@ class Question extends Component {
 
   handleChange = (e, { value, checked }) => {
     const { type } = this.props;
-    const { status } = this.state;
+    const { status, inputValue } = this.state;
 
     if (type === "radio" && status) {
       this.setState({
@@ -44,28 +66,33 @@ class Question extends Component {
 
     if (type === "checkbox") {
       this.setState({
-        value: { ...this.state.value, [value]: checked }
+        inputValue: merge(inputValue, { [value]: checked })
       });
     }
 
     if (type === "fill" || type === "radio") {
-      this.setState({ value });
+      this.setState({ inputValue: value });
     }
   };
 
   handleCheckAnswer = () => {
     const { correctAnswer, type, handleChecking, text } = this.props;
-    const { value, status } = this.state;
+    const { inputValue, status } = this.state;
 
     if (type === "fill" || type === "radio") {
-      const status = value.toLowerCase() === correctAnswer.toLowerCase();
+      const iv = inputValue.toString().toLowerCase();
+      const ca = correctAnswer.toLowerCase();
+
+      const status = iv === ca;
       this.setState({
         status
       });
     }
 
     if (type === "checkbox") {
-      const currentAnswer = Object.keys(value).filter(answer => value[answer]);
+      const currentAnswer = Object.keys(inputValue).filter(
+        answer => inputValue[answer]
+      );
 
       if (currentAnswer.length !== correctAnswer.length) {
         this.setState({ status: false });
@@ -89,8 +116,8 @@ class Question extends Component {
   };
 
   render() {
-    const { text, description, answers, type, correctAnswer } = this.props;
-    const { value, status, disabled } = this.state;
+    const { text, answers, type, correctAnswer } = this.props;
+    const { inputValue, status, disabled } = this.state;
 
     return (
       <StyledCard>
@@ -106,9 +133,10 @@ class Question extends Component {
           <StyledForm>
             <QuestionType
               type={type}
-              value={value}
+              value={inputValue}
               answers={answers}
               status={status}
+              disabled={disabled}
               correctAnswer={correctAnswer}
               handleChange={this.handleChange}
             />
@@ -127,9 +155,5 @@ class Question extends Component {
     );
   }
 }
-
-Question.defaultProps = {
-  type: "fill"
-};
 
 export default Question;

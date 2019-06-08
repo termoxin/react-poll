@@ -1,10 +1,14 @@
-import React from "react";
+import React, { Fragment } from "react";
 
 interface Props {
-  answers: Array<object>;
+  answers: object;
 }
 
-const ScreenResult: React.FunctionComponent<Props> = ({ answers }) =>
-  JSON.stringify(answers);
+const ScreenResult: React.FunctionComponent<Props> = ({ answers }) => (
+  <Fragment>
+    <h1>Results</h1>
+    {JSON.stringify(answers)}
+  </Fragment>
+);
 
 export default ScreenResult;

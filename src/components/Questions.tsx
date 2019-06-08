@@ -2,8 +2,26 @@ import React, { Component } from "react";
 import Question from "./Question";
 import ScreenResult from "./ScreenResult";
 
-class Questions extends Component {
-  constructor(props) {
+interface QuestionProps {
+  answers: Array<object>;
+  correctAnswer: string;
+  id: number | string;
+  text: string;
+  type: string;
+  description: string;
+  handleChange: Function;
+}
+
+interface Props {
+  questions: Array<object>;
+}
+
+interface State {
+  answers: object;
+}
+
+class Questions extends Component<Props, State> {
+  constructor(props: Props) {
     super(props);
 
     this.state = {
@@ -11,7 +29,7 @@ class Questions extends Component {
     };
   }
 
-  handleChecking = (status, text) => {
+  handleChecking = (status: boolean, text: string) => {
     this.setState(state => ({
       answers: { ...state.answers, [text]: status }
     }));
@@ -28,7 +46,7 @@ class Questions extends Component {
 
     return (
       <>
-        {questions.map(q => (
+        {questions.map((q: QuestionProps) => (
           <Question key={q.id} {...q} handleChecking={this.handleChecking} />
         ))}
       </>

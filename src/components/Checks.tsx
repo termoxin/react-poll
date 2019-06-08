@@ -8,7 +8,21 @@ const StyledCheckbox = styled(Checkbox)`
   }
 `;
 
-const Checks = ({
+interface Props {
+  answers: Array<string>;
+  value: object;
+  handleChange: Function;
+  status: boolean;
+  correctAnswer: string;
+  showCorrect: boolean;
+}
+
+interface AnswerProps {
+  id: string | number;
+  text: string;
+}
+
+const Checks: React.FunctionComponent<Props> = ({
   answers,
   value,
   handleChange,
@@ -17,12 +31,12 @@ const Checks = ({
   showCorrect = false
 }) => (
   <>
-    {answers.map(answer => (
+    {answers.map((answer: AnswerProps) => (
       <Form.Field key={answer.id}>
         <StyledCheckbox
           status={status && correctAnswer.indexOf(answer.text) > -1}
           label={answer.text}
-          value={answer.text}
+          value={value}
           showCorrect={showCorrect}
           name="checkbox"
           onChange={handleChange}

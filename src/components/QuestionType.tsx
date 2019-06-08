@@ -3,8 +3,22 @@ import Radios from "./Radios";
 import Checks from "./Checks";
 import Fill from "./Fill";
 
-const QuestionType = ({ status, type, ...rest }) => {
-  const validatedStatus = status ? status.toString() : undefined;
+interface Props {
+  status: boolean;
+  type: string;
+  answers: Array<object>;
+  value: any;
+  handleChange: Function;
+  correctAnswer: string;
+  disabled: boolean;
+}
+
+const QuestionType: React.FunctionComponent<Props> = ({
+  status,
+  type,
+  ...rest
+}) => {
+  const validatedStatus: string = status ? status.toString() : undefined;
 
   if (type === "checkbox") {
     return <Checks {...rest} status={validatedStatus} />;
