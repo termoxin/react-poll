@@ -9,7 +9,17 @@ const StyledInput = styled(Input)`
     props.status && props.showCorrect ? "1px solid #10d4108a" : undefined};
 `;
 
-const Fill = ({ handleChange, status, showCorrect = false }) => (
+interface Props {
+  handleChange: Function;
+  showCorrect: boolean;
+  status: string;
+}
+
+const Fill: React.FunctionComponent<Props> = ({
+  handleChange,
+  status,
+  showCorrect
+}) => (
   <>
     <StyledInput
       showCorrect={showCorrect}

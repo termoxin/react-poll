@@ -44,7 +44,7 @@ class Question extends Component<Props, State> {
     type: "fill"
   };
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
 
     this.state = {
@@ -139,6 +139,7 @@ class Question extends Component<Props, State> {
               disabled={disabled}
               correctAnswer={correctAnswer}
               handleChange={this.handleChange}
+              showCorrect={false}
             />
           </StyledForm>
         </Card.Content>

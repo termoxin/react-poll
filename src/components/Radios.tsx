@@ -14,7 +14,7 @@ const Radios = ({
   handleChange,
   status,
   disabled,
-  showCorrect = false
+  showCorrect 
 }) => {
   return (
     <>

@@ -9,16 +9,16 @@ const StyledCheckbox = styled(Checkbox)`
 `;
 
 interface Props {
-  answers: Array<string>;
+  answers: Array<object>;
   value: object;
   handleChange: Function;
-  status: boolean;
-  correctAnswer: string;
+  status: boolean | string;
+  correctAnswer: Array<string>;
   showCorrect: boolean;
 }
 
 interface AnswerProps {
-  id: string | number;
+  id: number;
   text: string;
 }
 
@@ -28,7 +28,7 @@ const Checks: React.FunctionComponent<Props> = ({
   handleChange,
   status,
   correctAnswer,
-  showCorrect = false
+  showCorrect
 }) => (
   <>
     {answers.map((answer: AnswerProps) => (
@@ -36,7 +36,7 @@ const Checks: React.FunctionComponent<Props> = ({
         <StyledCheckbox
           status={status && correctAnswer.indexOf(answer.text) > -1}
           label={answer.text}
-          value={value}
+          value={answer.text}
           showCorrect={showCorrect}
           name="checkbox"
           onChange={handleChange}
