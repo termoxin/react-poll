@@ -14,7 +14,7 @@ interface Props {
   handleChange: Function;
   status: boolean | string;
   correctAnswer: Array<string>;
-  showCorrect: boolean;
+  disabled: boolean;
 }
 
 interface AnswerProps {
@@ -28,7 +28,7 @@ const Checks: React.FunctionComponent<Props> = ({
   handleChange,
   status,
   correctAnswer,
-  showCorrect
+  disabled
 }) => (
   <>
     {answers.map((answer: AnswerProps) => (
@@ -37,8 +37,9 @@ const Checks: React.FunctionComponent<Props> = ({
           status={status && correctAnswer.indexOf(answer.text) > -1}
           label={answer.text}
           value={answer.text}
-          showCorrect={showCorrect}
+          showCorrect={false}
           name="checkbox"
+          disabled={disabled}
           onChange={handleChange}
         />
       </Form.Field>

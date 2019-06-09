@@ -11,44 +11,26 @@ interface Props {
   handleChange: Function;
   correctAnswer: any;
   disabled: boolean;
-  showCorrect: boolean;
 }
 
 const QuestionType: React.FunctionComponent<Props> = ({
   status,
   type,
-  showCorrect,
   answers,
   ...rest
 }) => {
   const validatedStatus = status ? "true" : "false";
 
   if (type === "checkbox") {
-    return (
-      <Checks
-        {...rest}
-        status={validatedStatus}
-        answers={answers}
-        showCorrect={showCorrect}
-      />
-    );
+    return <Checks {...rest} status={validatedStatus} answers={answers} />;
   }
 
   if (type === "radio") {
-    return (
-      <Radios
-        {...rest}
-        status={validatedStatus}
-        answers={answers}
-        showCorrect={showCorrect}
-      />
-    );
+    return <Radios {...rest} status={validatedStatus} answers={answers} />;
   }
 
   if (type === "fill") {
-    return (
-      <Fill {...rest} status={validatedStatus} showCorrect={showCorrect} />
-    );
+    return <Fill {...rest} status={validatedStatus} />;
   }
 };
 

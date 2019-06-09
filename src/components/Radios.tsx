@@ -8,39 +8,27 @@ const StyledRadio = styled(Radio)`
   }
 `;
 
-const Radios = ({
-  answers,
-  value,
-  handleChange,
-  status,
-  disabled,
-  showCorrect 
-}) => {
+const Radios = ({ answers, value, handleChange, status, disabled }) => {
+  const RadioButton = ({ text }) => {
+    let Comp = value === text && status ? StyledRadio : Radio;
+    Comp = (
+      <Comp
+        status={status}
+        label={text}
+        name="answer"
+        value={text}
+        checked={value === text}
+        onChange={handleChange}
+      />
+    );
+    return Comp;
+  };
+
   return (
     <>
       {answers.map(answer => (
         <Form.Field key={answer.id} disabled={disabled}>
-          {value === answer.text && status ? (
-            <StyledRadio
-              status={status}
-              label={answer.text}
-              name="answer"
-              value={answer.text}
-              showCorrect={showCorrect}
-              checked={value === answer.text}
-              onChange={handleChange}
-            />
-          ) : (
-            <Radio
-              status={status}
-              label={answer.text}
-              name="answer"
-              value={answer.text}
-              showCorrect={showCorrect}
-              checked={value === answer.text}
-              onChange={handleChange}
-            />
-          )}
+          <RadioButton text={answer.text} />
         </Form.Field>
       ))}
     </>

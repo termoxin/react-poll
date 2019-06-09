@@ -139,7 +139,6 @@ class Question extends Component<Props, State> {
               disabled={disabled}
               correctAnswer={correctAnswer}
               handleChange={this.handleChange}
-              showCorrect={false}
             />
           </StyledForm>
         </Card.Content>

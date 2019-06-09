@@ -11,18 +11,15 @@ const StyledInput = styled(Input)`
 
 interface Props {
   handleChange: Function;
-  showCorrect: boolean;
   status: string;
 }
 
 const Fill: React.FunctionComponent<Props> = ({
   handleChange,
   status,
-  showCorrect
 }) => (
   <>
     <StyledInput
-      showCorrect={showCorrect}
       status={status}
       placeholder="Type your answer here"
       onChange={handleChange}
