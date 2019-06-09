@@ -6,7 +6,7 @@ const StyledInput = styled(Input)`
   align-self: stretch;
   border-radius: 5px;
   border: ${props =>
-    props.status && props.showCorrect ? "1px solid #10d4108a" : undefined};
+    props.status? "1px solid #10d4108a" : undefined};
 `;
 
 interface Props {

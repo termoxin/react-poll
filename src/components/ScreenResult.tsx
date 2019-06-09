@@ -20,9 +20,16 @@ const ScreenResult: React.FunctionComponent<Props> = ({ answers }) => {
       <Icon name="close" color="red" />
     );
 
+  const numberOfCorrects = () => {
+    const overall = Object.keys(answers).length;
+    const correct = Object.values(answers).filter(answer => answer).length;
+
+    return `${correct}/${overall}`;
+  };
+
   return (
     <Fragment>
-      <h1>Results</h1>
+      <h1>Results | {numberOfCorrects()}</h1>
       <List>
         {Object.keys(answers).map(answer => (
           <li key={answer}>

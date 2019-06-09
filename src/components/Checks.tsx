@@ -4,7 +4,7 @@ import { Form, Checkbox } from "semantic-ui-react";
 
 const StyledCheckbox = styled(Checkbox)`
   && label {
-    color: ${props => (props.status && props.showCorrect ? "#10d410" : "")};
+    color: ${props => (props.status ? "#10d410" : "")};
   }
 `;
 
@@ -37,7 +37,6 @@ const Checks: React.FunctionComponent<Props> = ({
           status={status && correctAnswer.indexOf(answer.text) > -1}
           label={answer.text}
           value={answer.text}
-          showCorrect={false}
           name="checkbox"
           disabled={disabled}
           onChange={handleChange}
