@@ -40,6 +40,10 @@ class Questions extends Component<Props, State> {
     const { answers } = this.state;
     const length = Object.keys(answers).length;
 
+    if (!questions.length) {
+      return <h2>Please, upload a JSON file.</h2>;
+    }
+
     if (length === questions.length) {
       return <ScreenResult answers={answers} />;
     }

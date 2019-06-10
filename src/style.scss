@@ -13,3 +13,20 @@
 .left {
   text-align: left;
 }
+
+.files-dropzone {
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  font-weight: 700;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  background: #464b6b;
+  color: #fff;
+  transition: 0.3s all;
+}
+
+.files-dropzone:hover {
+  opacity: 0.9;
+}
