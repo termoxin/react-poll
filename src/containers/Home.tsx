@@ -3,7 +3,13 @@ import Questions from "../components/Questions";
 import { questions } from "../questions.json";
 import Files from "react-files";
 
-class Home extends Component {
+interface State {
+  questions: Array<object>;
+}
+
+class Home extends Component<{}, State> {
+  fileReader: FileReader;
+
   constructor(props) {
     super(props);
 
@@ -16,7 +22,7 @@ class Home extends Component {
 
   componentDidMount() {
     this.fileReader.onload = event => {
-      const file = event.target.result;
+      const file: string = this.fileReader.result as string;
       const { questions } = JSON.parse(file);
 
       this.setState({

@@ -39,6 +39,11 @@ interface State {
   disabled?: boolean;
 }
 
+interface CheckboxProps {
+  value: string;
+  checked: boolean;
+}
+
 class Question extends Component<Props, State> {
   static defaultProps: { type: string } = {
     type: "fill"
@@ -54,7 +59,10 @@ class Question extends Component<Props, State> {
     };
   }
 
-  handleChange = (e, { value, checked }): void => {
+  handleChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    { value, checked }: CheckboxProps
+  ) => {
     const { type } = this.props;
     const { status, inputValue } = this.state;
 

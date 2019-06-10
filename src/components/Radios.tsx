@@ -1,12 +1,6 @@
 import React from "react";
-import { Form, Radio } from "semantic-ui-react";
-import styled from "styled-components";
-
-const StyledRadio = styled(Radio)`
-  /* && label {
-    color: ${props => (props.status ? "#10d410" : "")};
-  } */
-`;
+import { Form } from "semantic-ui-react";
+import RadioButton from "./RadioButton";
 
 interface Props {
   answers: Array<object>;
@@ -19,32 +13,9 @@ interface Props {
 interface AnswerProps {
   id: number;
   text: string;
+  type: string;
+  key: number;
 }
-
-interface RadioButtonProps {
-  text: string;
-  value: string;
-  handleChange: Function;
-}
-
-const RadioButton: React.FunctionComponent<RadioButtonProps> = ({
-  text,
-  value,
-  handleChange
-}) => {
-  let Comp = value === text && status ? StyledRadio : Radio;
-  Comp = (
-    <Comp
-      status={status}
-      label={text}
-      name="answer"
-      value={text}
-      checked={value === text}
-      onChange={handleChange}
-    />
-  );
-  return Comp;
-};
 
 const Radios: React.FunctionComponent<Props> = ({
   answers,

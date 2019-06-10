@@ -22,11 +22,12 @@
   align-items: center;
   justify-content: center;
   height: 50px;
-  background: #464b6b;
+  // background: #464b6b;
+  background: #1b1c1d;
   color: #fff;
   transition: 0.3s all;
-}
 
-.files-dropzone:hover {
-  opacity: 0.9;
+  &:hover {
+    opacity: 0.9;
+  }
 }
