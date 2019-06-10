@@ -54,7 +54,7 @@ class Question extends Component<Props, State> {
     };
   }
 
-  handleChange = (e, { value, checked }) => {
+  handleChange = (e, { value, checked }): void => {
     const { type } = this.props;
     const { status, inputValue } = this.state;
 

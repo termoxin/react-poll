@@ -3,9 +3,9 @@ import styled from "styled-components";
 import { Form, Checkbox } from "semantic-ui-react";
 
 const StyledCheckbox = styled(Checkbox)`
-  && label {
+  /* && label {
     color: ${props => (props.status ? "#10d410" : "")};
-  }
+  } */
 `;
 
 interface Props {
