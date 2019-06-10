@@ -1,41 +1,56 @@
-import React from "react";
+import React, { Component } from "react";
 import Questions from "../components/Questions";
+import { questions } from "../questions.json";
+import Files from "react-files";
 
-const questions = [
-  {
-    id: 1,
-    type: "radio",
-    text: "What is render method in React library?",
-    correctAnswer: "It's a function that render a React Element.",
-    answers: [
-      { id: 1, text: "It's a function for multiple numbers." },
-      { id: 2, text: "It's a function that render a React Element." },
-      { id: 3, text: "I don't know." }
-    ]
-  },
-  {
-    id: 2,
-    type: "checkbox",
-    text: "Choose fruits in this list.",
-    correctAnswer: ["Apple", "Orange"],
-    answers: [
-      { id: 1, text: "Apple" },
-      { id: 2, text: "Orange" },
-      { id: 3, text: "Eggplant" }
-    ]
-  },
-  {
-    id: 3,
-    type: "fill",
-    text: "What is the one of the most important thing in our life?",
-    correctAnswer: "The opportunity to live"
+class Home extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      questions: null
+    };
+
+    this.fileReader = new FileReader();
   }
-];
 
-const Home = () => (
-  <div>
-    <Questions questions={questions} />
-  </div>
-);
+  componentDidMount() {
+    this.fileReader.onload = event => {
+      let questions = event.target.result;
+       = JSON.parse(questions.questions);
+
+      this.setState({
+        questions
+      });
+    };
+  }
+
+  onFileChange = file => {
+    this.fileReader.readAsText(file[0]);
+  };
+
+  onFileError = (error, file) => {
+    console.log("error code " + error.code + ": " + error.message);
+  };
+
+  render() {
+    return (
+      <div>
+        <div className="files">
+          <Files
+            className="files-dropzone"
+            onChange={this.onFileChange}
+            onError={this.onFileError}
+            accepts={[".json"]}
+            clickable
+          >
+            Drop files here or click to upload
+          </Files>
+        </div>
+        <Questions questions={questions} />
+      </div>
+    );
+  }
+}
 
 export default Home;

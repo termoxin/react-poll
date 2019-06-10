@@ -8,6 +8,7 @@
     "outDir": "dist",
     "baseUrl": ".",
     "jsx": "react",
+    "resolveJsonModule": true,
     "downlevelIteration": true,
     "paths": {
       "*": ["node_modules/*", "src/types/*"]

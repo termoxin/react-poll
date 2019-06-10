@@ -28,8 +28,7 @@ const ResultItem = styled.h1`
   }
 `;
 
-Card.Date = DateItem;
-Card.Result = ResultItem;
+
 
 interface Props {
   answers: object;
@@ -56,8 +55,8 @@ const ScreenResult: React.FunctionComponent<Props> = ({ answers }) => {
     <Fragment>
       <StyledCard>
         <Card.Header>
-          <Card.Result>{numberOfCorrects}</Card.Result>
-          <Card.Date>{date}</Card.Date>
+          <ResultItem>{numberOfCorrects}</ResultItem>
+          <DateItem>{date}</DateItem>
         </Card.Header>
         <Card.Content>
           <List>
