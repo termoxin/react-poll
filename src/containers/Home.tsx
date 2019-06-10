@@ -8,7 +8,7 @@ class Home extends Component {
     super(props);
 
     this.state = {
-      questions: null
+      questions: []
     };
 
     this.fileReader = new FileReader();
@@ -16,8 +16,8 @@ class Home extends Component {
 
   componentDidMount() {
     this.fileReader.onload = event => {
-      let questions = event.target.result;
-       = JSON.parse(questions.questions);
+      const file = event.target.result;
+      const { questions } = JSON.parse(file);
 
       this.setState({
         questions
@@ -26,6 +26,10 @@ class Home extends Component {
   }
 
   onFileChange = file => {
+    if (file.length > 1) {
+      file.shift();
+    }
+
     this.fileReader.readAsText(file[0]);
   };
 
@@ -34,6 +38,8 @@ class Home extends Component {
   };
 
   render() {
+    const { questions } = this.state;
+
     return (
       <div>
         <div className="files">
