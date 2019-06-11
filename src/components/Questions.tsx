@@ -3,6 +3,7 @@ import { Icon } from "semantic-ui-react";
 import styled from "styled-components";
 import Question from "./Question";
 import ScreenResult from "./ScreenResult";
+import { QUESTIONS_TYPES } from "../constants";
 
 const Container = styled.div`
   display: flex;
@@ -11,6 +12,7 @@ const Container = styled.div`
 const Arrow = styled(Icon)`
   cursor: pointer;
   align-self: center;
+  
   && {
     margin: 0 10px 0 10px;
   }
@@ -27,7 +29,7 @@ interface QuestionProps {
 }
 
 interface Props {
-  questions: Array<object>;
+  questions: any;
   type: string;
   name: string;
 }
@@ -83,10 +85,6 @@ class Questions extends Component<Props, State> {
     const { questions, type, name } = this.props;
     const { answers, indexQuestion } = this.state;
     const length = Object.keys(answers).length;
-    const QUESTIONS_TYPES = {
-      LIST: "list",
-      ARROWS: "arrows"
-    };
 
     if (!questions.length) {
       return <h2>Please, upload a JSON file.</h2>;
