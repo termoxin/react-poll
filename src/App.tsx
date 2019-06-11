@@ -25,6 +25,9 @@ const App = () => (
         <li>
           <Link to="/about">About</Link>
         </li>
+        <li>
+          <Link to="/logs">Logs</Link>
+        </li>
       </List>
       <Routes />
     </main>

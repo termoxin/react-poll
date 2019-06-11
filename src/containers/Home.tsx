@@ -5,6 +5,7 @@ import Files from "react-files";
 
 interface State {
   questions: Array<object>;
+  name: string;
 }
 
 class Home extends Component<{}, State> {
@@ -14,7 +15,8 @@ class Home extends Component<{}, State> {
     super(props);
 
     this.state = {
-      questions: []
+      questions: [],
+      name: ""
     };
 
     this.fileReader = new FileReader();
@@ -32,11 +34,17 @@ class Home extends Component<{}, State> {
   }
 
   onFileChange = file => {
+    const name = file[0].name;
+
     if (file.length > 1) {
       file.shift();
     }
 
     this.fileReader.readAsText(file[0]);
+
+    this.setState({
+      name
+    });
   };
 
   onFileError = (error, file) => {
@@ -44,7 +52,7 @@ class Home extends Component<{}, State> {
   };
 
   render() {
-    const { questions } = this.state;
+    const { questions, name } = this.state;
 
     return (
       <div>
@@ -59,7 +67,7 @@ class Home extends Component<{}, State> {
             Drop files here or click to upload
           </Files>
         </div>
-        <Questions questions={questions} />
+        <Questions questions={questions} name={name}/>
       </div>
     );
   }

@@ -2,6 +2,8 @@ import React, { Fragment } from "react";
 import styled from "styled-components";
 import { Icon, Card, List } from "semantic-ui-react";
 import { format } from "date-fns";
+import { write, read } from "../helpers/store";
+import { getRandomStr } from "../helpers/string";
 
 const StyledCard = styled(Card)`
   && {
@@ -28,13 +30,18 @@ const ResultItem = styled.h1`
   }
 `;
 
-
-
 interface Props {
   answers: object;
+  name: string;
 }
 
-const ScreenResult: React.FunctionComponent<Props> = ({ answers }) => {
+const ScreenResult: React.FunctionComponent<Props> = ({ answers, name }) => {
+  let logs = read("logs");
+
+  if (!logs) {
+    logs = [];
+  }
+
   const getStatus = answer =>
     answer ? (
       <Icon name="check" color="olive" />
@@ -43,8 +50,12 @@ const ScreenResult: React.FunctionComponent<Props> = ({ answers }) => {
     );
 
   const numberOfCorrects = (() => {
+    const id = getRandomStr(20);
+    const date = new Date();
     const overall = Object.keys(answers).length;
     const correct = Object.values(answers).filter(answer => answer).length;
+
+    write("logs", [...logs, { id, name, correct, overall, answers, date }]);
 
     return `${correct}/${overall}`;
   })();

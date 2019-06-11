@@ -29,6 +29,7 @@ interface QuestionProps {
 interface Props {
   questions: Array<object>;
   type: string;
+  name: string;
 }
 
 interface State {
@@ -79,7 +80,7 @@ class Questions extends Component<Props, State> {
   };
 
   render() {
-    const { questions, type } = this.props;
+    const { questions, type, name } = this.props;
     const { answers, indexQuestion } = this.state;
     const length = Object.keys(answers).length;
     const QUESTIONS_TYPES = {
@@ -92,7 +93,7 @@ class Questions extends Component<Props, State> {
     }
 
     if (length === questions.length) {
-      return <ScreenResult answers={answers} />;
+      return <ScreenResult answers={answers} name={name} />;
     }
 
     if (questions.length && type === QUESTIONS_TYPES.LIST) {
@@ -107,7 +108,7 @@ class Questions extends Component<Props, State> {
 
     if (questions.length && type === QUESTIONS_TYPES.ARROWS) {
       const currectQuestion: QuestionProps = questions[indexQuestion];
-      
+
       return (
         <Container key={currectQuestion.id}>
           <Arrow name="arrow left" size="big" onClick={this.previousQuestion} />
