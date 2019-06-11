@@ -22,12 +22,14 @@ const ListItem = styled.li`
   * {
     display: flex;
     justify-content: flex-start;
-    flex-grow: 1;
+    flex: 1 1 0%;
     align-items: center;
   }
 `;
 
 const Id = styled.span`
+  flex-basis: 5%;
+  flex-grow: 0;
   font-weight: 700;
 `;
 
@@ -37,9 +39,9 @@ const Date = styled.div`
   margin: 10px;
 `;
 
-const Name = styled.p``;
+const Name = styled.span``;
 
-const Correct = styled.p`
+const Correct = styled.span`
   color: green;
 `;
 
@@ -63,10 +65,10 @@ class Logs extends Component {
               <ListItem key={id}>
                 <Id>{index + 1}.</Id>
                 <Name>{name}</Name>
-                <Date>{dateToStr(date)}</Date>
                 <Correct>
                   {correct}/<Overall>{overall}</Overall>
                 </Correct>
+                <Date>{dateToStr(date)}</Date>
               </ListItem>
             ))}
           </List>
