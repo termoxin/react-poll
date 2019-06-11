@@ -1,9 +1,9 @@
 import React, { Fragment } from "react";
 import styled from "styled-components";
 import { Icon, Card, List } from "semantic-ui-react";
-import { format } from "date-fns";
 import { write, read } from "../helpers/store";
 import { getRandomStr } from "../helpers/string";
+import { dateToStr } from "../helpers/date";
 
 const StyledCard = styled(Card)`
   && {
@@ -60,14 +60,12 @@ const ScreenResult: React.FunctionComponent<Props> = ({ answers, name }) => {
     return `${correct}/${overall}`;
   })();
 
-  const date = format(new Date(), "MM.DD.YYYY HH:mm:ss");
-
   return (
     <Fragment>
       <StyledCard>
         <Card.Header>
           <ResultItem>{numberOfCorrects}</ResultItem>
-          <DateItem>{date}</DateItem>
+          <DateItem>{dateToStr(new Date())}</DateItem>
         </Card.Header>
         <Card.Content>
           <List>
