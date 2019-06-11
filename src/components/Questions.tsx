@@ -1,6 +1,20 @@
 import React, { Component } from "react";
+import { Icon } from "semantic-ui-react";
+import styled from "styled-components";
 import Question from "./Question";
 import ScreenResult from "./ScreenResult";
+
+const Container = styled.div`
+  display: flex;
+`;
+
+const Arrow = styled(Icon)`
+  cursor: pointer;
+  align-self: center;
+  && {
+    margin: 0 10px 0 10px;
+  }
+`;
 
 interface QuestionProps {
   answers: Array<object>;
@@ -14,17 +28,24 @@ interface QuestionProps {
 
 interface Props {
   questions: Array<object>;
+  type: string;
 }
 
 interface State {
   answers: object;
+  indexQuestion: number;
 }
 
 class Questions extends Component<Props, State> {
+  static defaultProps: { type: string } = {
+    type: "list"
+  };
+
   constructor(props: Props) {
     super(props);
 
     this.state = {
+      indexQuestion: 0,
       answers: {}
     };
   }
@@ -35,10 +56,37 @@ class Questions extends Component<Props, State> {
     }));
   };
 
-  render() {
+  nextQuestion = () => {
+    let { indexQuestion } = this.state;
     const { questions } = this.props;
-    const { answers } = this.state;
+
+    if (!(indexQuestion === questions.length)) {
+      this.setState({
+        indexQuestion: indexQuestion + 1
+      });
+    }
+  };
+
+  previousQuestion = () => {
+    let { indexQuestion } = this.state;
+
+    if (indexQuestion) {
+     this.setState({
+      indexQuestion: indexQuestion - 1
+    });
+    }
+
+    
+  };
+
+  render() {
+    const { questions, type } = this.props;
+    const { answers, indexQuestion } = this.state;
     const length = Object.keys(answers).length;
+    const QUESTIONS_TYPES = {
+      LIST: "list",
+      ARROWS: "arrows"
+    };
 
     if (!questions.length) {
       return <h2>Please, upload a JSON file.</h2>;
@@ -48,13 +96,27 @@ class Questions extends Component<Props, State> {
       return <ScreenResult answers={answers} />;
     }
 
-    return (
-      <>
-        {questions.map((q: QuestionProps) => (
-          <Question key={q.id} {...q} handleChecking={this.handleChecking} />
-        ))}
-      </>
-    );
+    if (questions.length && type === QUESTIONS_TYPES.LIST) {
+      return (
+        <>
+          {questions.map((q: QuestionProps) => (
+            <Question key={q.id} {...q} handleChecking={this.handleChecking} />
+          ))}
+        </>
+      );
+    }
+
+    if (questions.length && type === QUESTIONS_TYPES.ARROWS) {
+      const currectQuestion: QuestionProps = questions[indexQuestion];
+
+      return (
+        <Container>
+          <Arrow name="arrow left" size="big" onClick={this.previousQuestion} />
+          <Question {...currectQuestion} handleChecking={this.handleChecking} />
+          <Arrow name="arrow right" size="big" onClick={this.nextQuestion} />
+        </Container>
+      );
+    }
   }
 }
 

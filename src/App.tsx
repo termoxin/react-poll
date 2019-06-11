@@ -1,22 +1,31 @@
 import React from "react";
 import { BrowserRouter, Link } from "react-router-dom";
+import styled from "styled-components";
 import Routes from "./Routes";
+
+const List = styled.nav`
+  display: flex;
+  justify-content: space-around;
+  margin: 10px;
+
+  li {
+    font-size: 20px;
+    list-style: none;
+    flex: 1 1 50%;
+  }
+`;
 
 const App = () => (
   <BrowserRouter>
     <main className="container">
-      <div>
-        <h1>hello world!</h1>
-        <p>If you see this everything is working!</p>
-      </div>
-      <ul className="left">
+      <List>
         <li>
           <Link to="/">Home</Link>
         </li>
         <li>
           <Link to="/about">About</Link>
         </li>
-      </ul>
+      </List>
       <Routes />
     </main>
   </BrowserRouter>
