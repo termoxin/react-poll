@@ -59,8 +59,9 @@ class Questions extends Component<Props, State> {
   nextQuestion = () => {
     let { indexQuestion } = this.state;
     const { questions } = this.props;
+    const qLength = questions.length;
 
-    if (!(indexQuestion === questions.length)) {
+    if (qLength - 1 > indexQuestion && qLength > 1) {
       this.setState({
         indexQuestion: indexQuestion + 1
       });
@@ -71,12 +72,10 @@ class Questions extends Component<Props, State> {
     let { indexQuestion } = this.state;
 
     if (indexQuestion) {
-     this.setState({
-      indexQuestion: indexQuestion - 1
-    });
+      this.setState({
+        indexQuestion: indexQuestion - 1
+      });
     }
-
-    
   };
 
   render() {
@@ -110,7 +109,7 @@ class Questions extends Component<Props, State> {
       const currectQuestion: QuestionProps = questions[indexQuestion];
 
       return (
-        <Container>
+        <Container key={currectQuestion.id}>
           <Arrow name="arrow left" size="big" onClick={this.previousQuestion} />
           <Question {...currectQuestion} handleChecking={this.handleChecking} />
           <Arrow name="arrow right" size="big" onClick={this.nextQuestion} />
