@@ -107,7 +107,7 @@ class Questions extends Component<Props, State> {
 
     if (questions.length && type === QUESTIONS_TYPES.ARROWS) {
       const currectQuestion: QuestionProps = questions[indexQuestion];
-
+      
       return (
         <Container key={currectQuestion.id}>
           <Arrow name="arrow left" size="big" onClick={this.previousQuestion} />
