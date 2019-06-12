@@ -40,7 +40,19 @@ const Overall = styled.span`
   color: black;
 `;
 
-const ListLogs = ({ logs }) => (
+interface Log {
+  name: string;
+  id: string;
+  correct: number;
+  overall: number;
+  date: string;
+}
+
+interface Props {
+  logs: Array<Log>;
+}
+
+const ListLogs: React.FunctionComponent<Props> = ({ logs }) => (
   <List>
     {logs.map(({ id, name, date, correct, overall }, index) => (
       <ListItem key={id}>
