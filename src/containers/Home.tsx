@@ -67,7 +67,7 @@ class Home extends Component<{}, State> {
             Drop files here or click to upload
           </Files>
         </div>
-        <Questions questions={questions} name={name} type="arrows" />
+        <Questions questions={questions} name={name}  />
       </div>
     );
   }

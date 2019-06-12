@@ -51,7 +51,9 @@ const Overall = styled.span`
 
 class Logs extends Component {
   render() {
-    const logs = read("logs");
+    let logs = read("logs");
+
+    logs = logs || [];
 
     return (
       <SCard>

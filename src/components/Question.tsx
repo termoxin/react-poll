@@ -16,11 +16,26 @@ const StyledCard = styled(Card)`
   }
 `;
 
+const CardHeader = styled(Card.Header)`
+  && {
+    display: flex;
+    justify-content: space-evenly;
+  }
+`;
+
 const StyledForm = styled(Form)`
   display: flex;
   flex-flow: column nowrap;
   align-items: flex-start;
 `;
+
+
+const CardTextID = styled.span`
+      font-size: 13px;
+  font-weight: 400;
+`;
+
+const CardTextP = styled.p``;
 
 interface Props {
   answers: Array<object>;
@@ -31,6 +46,7 @@ interface Props {
   type: string;
   description: string;
   handleChange: Function;
+  count: number;
 }
 
 interface State {
@@ -124,13 +140,18 @@ class Question extends Component<Props, State> {
   };
 
   render() {
-    const { text, answers, type, correctAnswer } = this.props;
+    const { text, answers, type, correctAnswer, id, count } = this.props;
     const { inputValue, status, disabled } = this.state;
 
     return (
       <StyledCard>
         <Card.Content>
-          <Card.Header>{text}</Card.Header>
+          <Card.Header>
+            <CardTextID>
+                {id}/{count}
+              </CardTextID>
+              <CardTextP>{text}</CardTextP>
+          </Card.Header>
           <Card.Description>
             {type !== "fill"
               ? "Check that you consider correct."

@@ -12,7 +12,7 @@ const Container = styled.div`
 const Arrow = styled(Icon)`
   cursor: pointer;
   align-self: center;
-  
+
   && {
     margin: 0 10px 0 10px;
   }
@@ -85,32 +85,42 @@ class Questions extends Component<Props, State> {
     const { questions, type, name } = this.props;
     const { answers, indexQuestion } = this.state;
     const length = Object.keys(answers).length;
+    const qsLength = questions.length;
 
-    if (!questions.length) {
+    if (!qsLength) {
       return <h2>Please, upload a JSON file.</h2>;
     }
 
-    if (length === questions.length) {
+    if (length === qsLength) {
       return <ScreenResult answers={answers} name={name} />;
     }
 
-    if (questions.length && type === QUESTIONS_TYPES.LIST) {
+    if (qsLength && type === QUESTIONS_TYPES.LIST) {
       return (
         <>
           {questions.map((q: QuestionProps) => (
-            <Question key={q.id} {...q} handleChecking={this.handleChecking} />
+            <Question
+              key={q.id}
+              {...q}
+              handleChecking={this.handleChecking}
+              count={qsLength}
+            />
           ))}
         </>
       );
     }
 
-    if (questions.length && type === QUESTIONS_TYPES.ARROWS) {
+    if (qsLength && type === QUESTIONS_TYPES.ARROWS) {
       const currectQuestion: QuestionProps = questions[indexQuestion];
 
       return (
         <Container key={currectQuestion.id}>
           <Arrow name="arrow left" size="big" onClick={this.previousQuestion} />
-          <Question {...currectQuestion} handleChecking={this.handleChecking} />
+          <Question
+            {...currectQuestion}
+            handleChecking={this.handleChecking}
+            count={qsLength}
+          />
           <Arrow name="arrow right" size="big" onClick={this.nextQuestion} />
         </Container>
       );
