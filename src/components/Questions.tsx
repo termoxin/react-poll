@@ -88,7 +88,7 @@ class Questions extends Component<Props, State> {
     const qsLength = questions.length;
 
     if (!qsLength) {
-      return <h2>Please, upload a JSON file.</h2>;
+      return '';
     }
 
     if (length === qsLength) {

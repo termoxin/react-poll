@@ -1,8 +1,8 @@
 {
-  "name": "react-pull",
+  "name": "react-poll",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "This component serves for making polls in React",
+  "main": "build/index.js",
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack-dev-server -d -c",
     "build": "cross-env NODE_ENV=production webpack -p",
@@ -11,26 +11,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "jest": {
-    "moduleFileExtensions": [
-      "js",
-      "jsx"
-    ],
-    "moduleDirectories": [
-      "node_modules"
-    ],
-    "setupFiles": [
-      "<rootDir>/src/tests/setup.js"
-    ],
-    "moduleNameMapper": {
-      "\\.(css|styl|less|sass|scss)$": "identity-obj-proxy"
-    },
-    "transform": {
-      "^.+\\.js$": "babel-jest",
-      "^.+\\.jsx$": "babel-jest",
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/src/tests/__mock__/fileTransformer.js"
-    }
-  },
   "devDependencies": {
     "@babel/core": "^7.4.5",
     "@babel/plugin-proposal-class-properties": "^7.4.4",
@@ -82,5 +62,9 @@
     "semantic-ui-react": "^0.87.1",
     "styled-components": "^4.2.1",
     "whatwg-fetch": "^3.0.0"
+  },
+  "peerDependencies": {
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
   }
 }
