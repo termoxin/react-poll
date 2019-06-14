@@ -14,19 +14,33 @@ npm install @termoxin/react-poll
 import Poll from "@termoxin/react-poll ";
 ```
 
-2 . Include @termoxin/react-poll component
+2 . Include semantic-css for styling component
+
+```html
+<link
+  rel="stylesheet"
+  href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css"
+/>
+```
+
+3 . Include @termoxin/react-poll component
 
 ```js
 <Poll />
 ```
 
+## EXAMPLE
+
+[Example's code](https://github.com/termoxin/react-poll-examples/tree/master/src)
+
+[Check demo](https://termoxin.github.io/react-poll-examples/)
+
+	
 ## Options
 
 Notes:
 
 - The tooltip sets `type: fill` as **default** attributes. You don't have to add these options if you don't want to change the defaults
-
-[Check example](https://github.com/termoxin/react-poll)
 
 | Global    |  Type  | Values       | Description                                                                                   |
 | --------- | :----: | :----------- | :-------------------------------------------------------------------------------------------- |

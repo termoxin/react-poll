@@ -87,7 +87,7 @@ var Questions = /** @class */ (function (_super) {
         var _a = this.props, questions = _a.questions, type = _a.type, name = _a.name;
         var _b = this.state, answers = _b.answers, indexQuestion = _b.indexQuestion;
         var length = Object.keys(answers).length;
-        var qsLength = questions.length;
+        var qsLength = ([] || questions).length;
         if (!qsLength) {
             return '';
         }
@@ -95,7 +95,8 @@ var Questions = /** @class */ (function (_super) {
             return react_1.default.createElement(ScreenResult_1.default, { answers: answers, name: name });
         }
         if (qsLength && type === constants_1.QUESTIONS_TYPES.LIST) {
-            return (react_1.default.createElement(react_1.default.Fragment, null, questions.map(function (q) { return (react_1.default.createElement(Question_1.default, __assign({ key: q.id }, q, { handleChecking: _this.handleChecking, count: qsLength }))); })));
+            var qs = [] || questions;
+            return (react_1.default.createElement(react_1.default.Fragment, null, qs.map(function (q) { return (react_1.default.createElement(Question_1.default, __assign({ key: q.id }, q, { handleChecking: _this.handleChecking, count: qsLength }))); })));
         }
         if (qsLength && type === constants_1.QUESTIONS_TYPES.ARROWS) {
             var currectQuestion = questions[indexQuestion];
