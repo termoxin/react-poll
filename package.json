@@ -8,7 +8,17 @@
     "build": "cross-env NODE_ENV=production webpack -p",
     "test": "jest"
   },
-  "keywords": [],
+  "keywords": [
+  	"react",
+  	"ui",
+  	"poll",
+  	"polls",
+  	"arrow",
+  	"widget",
+  	"css",
+  	"npm",
+  	"react-component"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
