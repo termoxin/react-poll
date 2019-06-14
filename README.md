@@ -1,20 +1,20 @@
 ## Installation
 
 ```sh
-npm install react-poll
+npm install @termoxin/react-poll
 ```
 
 ## Usage
 
 **Using NPM**
 
-1 . Require react-poll after installation
+1 . Require @termoxin/react-poll after installation
 
 ```js
-import Poll from "react-poll";
+import Poll from "@termoxin/react-poll ";
 ```
 
-2 . Include react-poll component
+2 . Include @termoxin/react-poll component
 
 ```js
 <Poll />
