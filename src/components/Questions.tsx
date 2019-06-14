@@ -85,9 +85,9 @@ class Questions extends Component<Props, State> {
     const { questions, type, name } = this.props;
     const { answers, indexQuestion } = this.state;
     const length = Object.keys(answers).length;
-    const qsLength = ([] || questions).length;
+    const qsLength = [].length || questions.length;
 
-    if (!qsLength) {
+    if (qsLength) {
       return '';
     }
 
@@ -96,7 +96,7 @@ class Questions extends Component<Props, State> {
     }
 
     if (qsLength && type === QUESTIONS_TYPES.LIST) {
-      const qs = [] || questions;
+      const qs = questions || [];
       
       return (
         <>
