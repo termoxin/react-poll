@@ -88,7 +88,7 @@ var Questions = /** @class */ (function (_super) {
         var _b = this.state, answers = _b.answers, indexQuestion = _b.indexQuestion;
         var length = Object.keys(answers).length;
         var qsLength = [].length || questions.length;
-        if (qsLength) {
+        if (!qsLength) {
             return '';
         }
         if (length === qsLength) {

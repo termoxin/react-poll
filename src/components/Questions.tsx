@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { Icon } from "semantic-ui-react";
 import styled from "styled-components";
 import Question from "./Question";
@@ -40,8 +40,9 @@ interface State {
 }
 
 class Questions extends Component<Props, State> {
-  static defaultProps: { type: string } = {
-    type: "list"
+  static defaultProps: { type: string; questions: any } = {
+    type: "list",
+    questions: []
   };
 
   constructor(props: Props) {
@@ -87,8 +88,8 @@ class Questions extends Component<Props, State> {
     const length = Object.keys(answers).length;
     const qsLength = [].length || questions.length;
 
-    if (qsLength) {
-      return '';
+    if (!qsLength) {
+      return <Fragment />;
     }
 
     if (length === qsLength) {
@@ -97,7 +98,7 @@ class Questions extends Component<Props, State> {
 
     if (qsLength && type === QUESTIONS_TYPES.LIST) {
       const qs = questions || [];
-      
+
       return (
         <>
           {qs.map((q: QuestionProps) => (

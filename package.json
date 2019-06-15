@@ -1,12 +1,12 @@
 {
   "name": "@termoxin/react-poll",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "This component serves for making polls in React",
   "main": "build/index.js",
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack-dev-server -d -c",
     "build": "cross-env NODE_ENV=production webpack -p",
-    "test": "jest"
+    "test": "jest --watch"
   },
   "keywords": [
     "react",
@@ -31,5 +31,20 @@
   "peerDependencies": {
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.4.4",
+    "@babel/plugin-transform-async-to-generator": "^7.4.4",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/preset-typescript": "^7.3.3",
+    "babel-plugin-styled-components": "^1.10.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "enzyme-to-json": "^3.3.5",
+    "jest": "^24.8.0",
+    "jest-enzyme": "^7.0.2",
+    "jest-styled-components": "^6.3.3"
   }
 }

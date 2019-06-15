@@ -29,13 +29,14 @@ const StyledForm = styled(Form)`
   align-items: flex-start;
 `;
 
-
 const CardTextID = styled.span`
-      font-size: 13px;
+  font-size: 13px;
   font-weight: 400;
 `;
 
 const CardTextP = styled.p``;
+
+Button.displayName = "Button";
 
 interface Props {
   answers: Array<object>;
@@ -102,10 +103,12 @@ class Question extends Component<Props, State> {
   handleCheckAnswer = () => {
     const { correctAnswer, type, handleChecking, text } = this.props;
     const { inputValue, status } = this.state;
+    const handleCheckingOrPureFunction = handleChecking || function() {};
 
     if (type === "fill" || type === "radio") {
       const iv = inputValue.toString().toLowerCase();
-      const ca = correctAnswer.toLowerCase();
+      let ca =
+        typeof correctAnswer !== "undefined" ? correctAnswer.toLowerCase() : "";
 
       const status = iv === ca;
       this.setState({
@@ -135,7 +138,7 @@ class Question extends Component<Props, State> {
       {
         disabled: true
       },
-      () => handleChecking(this.state.status, text)
+      () => handleCheckingOrPureFunction(this.state.status, text)
     );
   };
 
@@ -148,9 +151,9 @@ class Question extends Component<Props, State> {
         <Card.Content>
           <Card.Header>
             <CardTextID>
-                {id}/{count}
-              </CardTextID>
-              <CardTextP>{text}</CardTextP>
+              {id}/{count}
+            </CardTextID>
+            <CardTextP>{text}</CardTextP>
           </Card.Header>
           <Card.Description>
             {type !== "fill"
