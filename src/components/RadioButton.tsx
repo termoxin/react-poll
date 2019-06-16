@@ -23,7 +23,6 @@ const RadioButton: React.FunctionComponent<Props> = ({
 
   return (
     <Comp
-      status={status}
       label={text}
       name="answer"
       value={text}

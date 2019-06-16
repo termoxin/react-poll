@@ -1,17 +1,23 @@
 import React from "react";
-// import { shallow, mount } from "enzyme";
+import { shallow, mount } from "enzyme";
 import { create } from "react-test-renderer";
 import "jest-enzyme";
 import Question from "../src/components/Question";
 
+const answers = [
+  { id: 1, text: "Yeah!" },
+  { id: 2, text: "No!" },
+  { id: 3, text: "Probably." }
+];
+
 describe("Question component", () => {
   // @TODO: If you are not make sure that it won't change not it'll launch
 
-  // it("matches the snapshot", () => {
-  //   const tree = renderer.create(<Question />).toJSON();
+  it("matches the snapshot", () => {
+    const tree = create(<Question />).toJSON();
 
-  //   expect(tree).toMatchSnapshot();
-  // });
+    expect(tree).toMatchSnapshot();
+  });
 
   it("disabled should be true when button is clicked", () => {
     const component = create(<Question />);
@@ -42,14 +48,8 @@ describe("Question component", () => {
   });
 
   it("there is right input type - checkbox", () => {
-    const answers = [
-      { id: 1, text: "Yeah!" },
-      { id: 2, text: "No!" },
-      { id: 3, text: "Probably." }
-    ];
-
     const component = create(
-      <Question type="checkbox" answers={answers} correctAnswer={"Yeah!"} />
+      <Question type="checkbox" answers={answers} correctAnswer={["Yeah!"]} />
     );
 
     const root = component.root;
@@ -57,5 +57,24 @@ describe("Question component", () => {
 
     expect(listOfCheckboxes[0].props.value).toBe("Yeah!");
     expect(listOfCheckboxes[2].props.value).toBe("Probably.");
+  });
+
+  it("there is right input type - fill", () => {
+    const component = create(<Question correctAnswer="TEXT" />);
+    const root = component.root;
+    const input = root.findByType("input").props.type;
+
+    expect(input).toEqual("text");
+  });
+
+  it("there is right input type - radio", () => {
+    const component = create(
+      <Question type="radio" answers={answers} correctAnswer="TEXT" />
+    );
+    const root = component.root;
+    const listOfRadios = root.findAll(element => element.type === "input");
+
+    expect(listOfRadios[0].props.value).toBe("Yeah!");
+    expect(listOfRadios[2].props.value).toBe("Probably.");
   });
 });

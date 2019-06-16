@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Question component matches the snapshot 1`] = `
+<div
+  className="ui card StyledCard-hvznlg-1 jMKqEg"
+  onClick={[Function]}
+>
+  <div
+    className="content"
+  >
+    <div
+      className="header"
+    >
+      <span
+        className="CardTextID-hvznlg-4 ixDgNO"
+      >
+        /
+      </span>
+      <p
+        className="CardTextP-hvznlg-5 faoLx"
+      />
+    </div>
+    <div
+      className="description"
+    >
+      Fill in this field.
+    </div>
+  </div>
+  <div
+    className="content"
+  >
+    <form
+      className="ui form StyledForm-hvznlg-3 bUFIME"
+      onSubmit={[Function]}
+    >
+      <div
+        className="ui input StyledInput-sc-16u23nf-0 gXWRui"
+        status="false"
+      >
+        <input
+          disabled={false}
+          onChange={[Function]}
+          placeholder="Type your answer here"
+          type="text"
+        />
+      </div>
+    </form>
+  </div>
+  <div
+    className="content ButtonContent-hvznlg-0 bYUtbp"
+  >
+    <button
+      className="ui secondary button"
+      onClick={[Function]}
+    >
+      Ok
+    </button>
+  </div>
+</div>
+`;
