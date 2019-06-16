@@ -62,8 +62,9 @@ interface CheckboxProps {
 }
 
 class Question extends Component<Props, State> {
-  static defaultProps: { type: string } = {
-    type: "fill"
+  static defaultProps: { type: string, disabled: boolean } = {
+    type: "fill",
+    disabled: false
   };
 
   constructor(props: Props) {
@@ -82,6 +83,8 @@ class Question extends Component<Props, State> {
   ) => {
     const { type } = this.props;
     const { status, inputValue } = this.state;
+
+  console.log(e, value)
 
     if (type === "radio" && status) {
       this.setState({

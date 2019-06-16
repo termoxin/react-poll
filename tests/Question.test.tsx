@@ -47,7 +47,7 @@ describe("Question component", () => {
     expect(text).toEqual("Text");
   });
 
-  it("there is right input type - checkbox", () => {
+  it("there is right input type and type is equal checkbox", () => {
     const component = create(
       <Question type="checkbox" answers={answers} correctAnswer={["Yeah!"]} />
     );
@@ -59,7 +59,7 @@ describe("Question component", () => {
     expect(listOfCheckboxes[2].props.value).toBe("Probably.");
   });
 
-  it("there is right input type - fill", () => {
+  it("there is right input type and type is equal fill", () => {
     const component = create(<Question correctAnswer="TEXT" />);
     const root = component.root;
     const input = root.findByType("input").props.type;
@@ -67,7 +67,7 @@ describe("Question component", () => {
     expect(input).toEqual("text");
   });
 
-  it("there is right input type - radio", () => {
+  it("there is right input type and type is equal radio", () => {
     const component = create(
       <Question type="radio" answers={answers} correctAnswer="TEXT" />
     );
@@ -76,5 +76,38 @@ describe("Question component", () => {
 
     expect(listOfRadios[0].props.value).toBe("Yeah!");
     expect(listOfRadios[2].props.value).toBe("Probably.");
+  });
+
+  it("successful checking of correct answer in input type such as fill", () => {
+    const component = create(<Question correctAnswer="TEXT" />);
+    const root = component.root;
+    const instance = component.getInstance();
+    const input = root.findByType("input");
+    const button = root.findByType("button");
+
+    instance.setState({ inputValue: "TEXT" });
+
+    button.props.onClick();
+
+    expect(input.props.disabled).toEqual(true);
+    expect(instance.state.inputValue).toEqual("TEXT");
+    expect(instance.state.status).toEqual(true);
+  });
+
+  it("successful checking of correct answer in input type such as radio", () => {
+    const component = create(
+      <Question correctAnswer="TEXT" type="radio" answers={answers} />
+    );
+    const root = component.root;
+    const instance = component.getInstance();
+    const listOfRadios = root.findAll(element => element.type === "input");
+    const button = root.findByType("button");
+
+    instance.setState({ inputValue: "TEXT" });
+
+    button.props.onClick();
+
+    expect(instance.state.inputValue).toEqual("TEXT");
+    expect(instance.state.status).toEqual(true);
   });
 });
