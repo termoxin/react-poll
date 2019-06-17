@@ -21,7 +21,6 @@ const Radios: React.FunctionComponent<Props> = ({
   answers,
   value,
   handleChange,
-  status,
   disabled
 }) => {
   return (

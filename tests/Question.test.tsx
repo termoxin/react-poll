@@ -1,7 +1,5 @@
 import React from "react";
-import { shallow, mount } from "enzyme";
 import { create } from "react-test-renderer";
-import "jest-enzyme";
 import Question from "../src/components/Question";
 
 const answers = [
@@ -109,5 +107,50 @@ describe("Question component", () => {
 
     expect(instance.state.inputValue).toEqual("TEXT");
     expect(instance.state.status).toEqual(true);
+  });
+
+  it("changing state and value when onChange in fill", () => {
+    const component = create(<Question correctAnswer="TEXT" />);
+    const root = component.root;
+    const instance = component.getInstance();
+    const event = { target: { value: "TEXT" } };
+    const input = root.findByType("input");
+
+    input.props.onChange(event);
+
+    expect(instance.state.inputValue).toEqual("TEXT");
+  });
+
+  it("changing state and value when onChange in radio", () => {
+    const component = create(
+      <Question correctAnswer="Yeah!" type="radio" answers={answers} />
+    );
+    const root = component.root;
+    const instance = component.getInstance();
+    const event = { value: "TEXT" };
+    const input = root.findAll(element => element.props.onChange);
+
+    input[1].props.onChange({}, event);
+
+    expect(instance.state.inputValue).toEqual("TEXT");
+  });
+
+  it("changing state and value when onChange in checkbox", () => {
+    const component = create(
+      <Question correctAnswer={["Yeah"]} type="checkbox" answers={answers} />
+    );
+    const root = component.root;
+    const instance = component.getInstance();
+    const fEvent = { value: "Yeah", checked: true };
+    const sEvent = { value: "Probably.", checked: true };
+    const input = root.findAll(element => element.props.onChange);
+
+    input[0].props.onChange({}, fEvent);
+    input[2].props.onChange({}, sEvent);
+
+    expect(instance.state.inputValue).toEqual({
+      "Probably.": true,
+      Yeah: true
+    });
   });
 });

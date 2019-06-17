@@ -62,7 +62,7 @@ interface CheckboxProps {
 }
 
 class Question extends Component<Props, State> {
-  static defaultProps: { type: string, disabled: boolean } = {
+  static defaultProps: { type: string; disabled: boolean } = {
     type: "fill",
     disabled: false
   };
@@ -79,27 +79,29 @@ class Question extends Component<Props, State> {
 
   handleChange = (
     e: React.ChangeEvent<HTMLInputElement>,
-    { value, checked }: CheckboxProps
+    data: CheckboxProps
   ) => {
     const { type } = this.props;
     const { status, inputValue } = this.state;
 
-  console.log(e, value)
+    if (data) {
+      const { value, checked } = data;
 
-    if (type === "radio" && status) {
-      this.setState({
-        status: false
-      });
-    }
+      if (type === "radio" && status) {
+        this.setState({
+          status: false
+        });
+      }
 
-    if (type === "checkbox") {
-      this.setState({
-        inputValue: merge(inputValue, { [value]: checked })
-      });
-    }
+      if (type === "checkbox") {
+        this.setState({
+          inputValue: merge(inputValue, { [value]: checked })
+        });
+      }
 
-    if (type === "fill" || type === "radio") {
-      this.setState({ inputValue: value });
+      if (type === "fill" || type === "radio") {
+        this.setState({ inputValue: value });
+      }
     }
   };
 

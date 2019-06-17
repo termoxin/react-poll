@@ -19,7 +19,7 @@ const RadioButton: React.FunctionComponent<Props> = ({
   value,
   handleChange
 }) => {
-  let Comp = value === text && status ? StyledRadio : Radio;
+  let Comp = value === text ? StyledRadio : Radio;
 
   return (
     <Comp
