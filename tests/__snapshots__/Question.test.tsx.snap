@@ -2,7 +2,7 @@
 
 exports[`Question component matches the snapshot 1`] = `
 <div
-  className="ui card StyledCard-hvznlg-1 jMKqEg"
+  className="ui card StyledCard-hvznlg-1 fKVLbp"
   onClick={[Function]}
 >
   <div

@@ -11,7 +11,7 @@ const ButtonContent = styled(Card.Content)`
 
 const StyledCard = styled(Card)`
   && {
-    width: 768px;
+    width: 600px;
     min-width: 320px;
   }
 `;

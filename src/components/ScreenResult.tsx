@@ -35,6 +35,11 @@ interface Props {
   name: string;
 }
 
+const defaultProps: Props = {
+  answers: {},
+  name: "name_" + +new Date()
+};
+
 const ScreenResult: React.FunctionComponent<Props> = ({ answers, name }) => {
   let logs = read("logs");
 
@@ -80,5 +85,7 @@ const ScreenResult: React.FunctionComponent<Props> = ({ answers, name }) => {
     </Fragment>
   );
 };
+
+ScreenResult.defaultProps = defaultProps;
 
 export default ScreenResult;
