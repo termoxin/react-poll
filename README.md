@@ -11,7 +11,7 @@ npm install @termoxin/react-poll
 1 . Require @termoxin/react-poll after installation
 
 ```js
-import Poll from "@termoxin/react-poll ";
+import ReactPoll.Poll from "@termoxin/react-poll";
 ```
 
 2 . Include semantic-css for styling component
@@ -26,7 +26,7 @@ import Poll from "@termoxin/react-poll ";
 3 . Include @termoxin/react-poll component
 
 ```js
-<Poll />
+<ReactPoll.Poll />
 ```
 
 ## EXAMPLE
@@ -43,7 +43,7 @@ Notes:
 
 | Global    |  Type   | Values       | Description                                                                                        |
 | --------- | :-----: | :----------- | :------------------------------------------------------------------------------------------------- |
-| questions |  Array  |              | These is an array to use for `<Questions />`                                                       |
+| questions |  Array  |              | These is an array to use for `<Poll />`                                                       |
 | type      | string  | arrows, fill | Poll type                                                                                          |
 | logs      | boolean | true, false  | Logs switch on/off for `<Logs />` component                                                        |
 | name      | string  |              | A name that's showing in logs (after each a completed poll, component creates a log in locaStorage |
