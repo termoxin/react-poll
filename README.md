@@ -45,7 +45,7 @@ Notes:
 | --------- | :-----: | :----------- | :------------------------------------------------------------------------------------------------- |
 | questions |  Array  |              | These is an array to use for `<Poll />`                                                       |
 | type      | string  | arrows, fill | Poll type                                                                                          |
-| logs      | boolean | true, false  | Logs switch on/off for `<Logs />` component                                                        |
+| logging      | boolean | true, false  | Logs switch on/off for `<Logs />` component                                                        |
 | name      | string  |              | A name that's showing in logs (after each a completed poll, component creates a log in locaStorage |
 
 **Data structure for questions**:

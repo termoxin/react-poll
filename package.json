@@ -1,6 +1,6 @@
 {
   "name": "@termoxin/react-poll",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "This component serves for making polls in React",
   "main": "build/index.js",
   "scripts": {

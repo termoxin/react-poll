@@ -33,7 +33,6 @@ var __importStar = (this && this.__importStar) || function (mod) {
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(require("react"));
 var styled_components_1 = __importDefault(require("styled-components"));
@@ -47,11 +46,11 @@ var DateItem = styled_components_1.default.div(templateObject_3 || (templateObje
 var ResultItem = styled_components_1.default.h1(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n  && {\n    margin: 5px;\n  }\n"], ["\n  && {\n    margin: 5px;\n  }\n"])));
 var defaultProps = {
     answers: {},
-    logs: false,
+    logging: false,
     name: "name_" + +new Date()
 };
 var ScreenResult = function (_a) {
-    var answers = _a.answers, name = _a.name;
+    var answers = _a.answers, name = _a.name, logging = _a.logging;
     var logs = store_1.read("logs");
     if (!logs) {
         logs = [];
@@ -60,12 +59,11 @@ var ScreenResult = function (_a) {
         return answer ? (react_1.default.createElement(semantic_ui_react_1.Icon, { name: "check", color: "olive" })) : (react_1.default.createElement(semantic_ui_react_1.Icon, { name: "close", color: "red" }));
     };
     var numberOfCorrects = (function () {
-        var logs = _this.props.logs;
         var id = string_1.getRandomStr(20);
         var date = new Date();
         var overall = Object.keys(answers).length;
         var correct = Object.values(answers).filter(function (answer) { return answer; }).length;
-        if (logs) {
+        if (logging) {
             store_1.write("logs", __spread(logs, [{ id: id, name: name, correct: correct, overall: overall, answers: answers, date: date }]));
         }
         return correct + "/" + overall;

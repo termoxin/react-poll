@@ -33,15 +33,16 @@ const ResultItem = styled.h1`
 interface Props {
   answers: object;
   name: string;
+  logging: boolean;
 }
 
 const defaultProps: Props = {
   answers: {},
-  logs: false,
+  logging: false,
   name: "name_" + +new Date()
 };
 
-const ScreenResult: React.FunctionComponent<Props> = ({ answers, name }) => {
+const ScreenResult: React.FunctionComponent<Props> = ({ answers, name, logging }) => {
   let logs = read("logs");
 
   if (!logs) {
@@ -56,13 +57,12 @@ const ScreenResult: React.FunctionComponent<Props> = ({ answers, name }) => {
     );
 
   const numberOfCorrects = (() => {
-    const { logs } = this.props;
     const id = getRandomStr(20);
     const date = new Date();
     const overall = Object.keys(answers).length;
     const correct = Object.values(answers).filter(answer => answer).length;
 
-    if(logs) {
+    if(logging) {
       write("logs", [...logs, { id, name, correct, overall, answers, date }])
     }
 
