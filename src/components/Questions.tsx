@@ -83,7 +83,7 @@ class Questions extends Component<Props, State> {
   };
 
   render() {
-    const { questions, type, name } = this.props;
+    const { questions, type, name, logging } = this.props;
     const { answers, indexQuestion } = this.state;
     const length = Object.keys(answers).length;
     const qsLength = [].length || questions.length;
@@ -93,7 +93,7 @@ class Questions extends Component<Props, State> {
     }
 
     if (length === qsLength) {
-      return <ScreenResult answers={answers} name={name} />;
+      return <ScreenResult answers={answers} logging={logging} />;
     }
 
     if (qsLength && type === QUESTIONS_TYPES.LIST) {
@@ -104,9 +104,9 @@ class Questions extends Component<Props, State> {
           {qs.map((q: QuestionProps) => (
             <Question
               key={q.id}
-              {...q}
               handleChecking={this.handleChecking}
               count={qsLength}
+              {...q}
             />
           ))}
         </>
