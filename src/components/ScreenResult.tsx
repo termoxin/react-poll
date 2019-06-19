@@ -63,7 +63,7 @@ const ScreenResult: React.FunctionComponent<Props> = ({ answers, name }) => {
     const correct = Object.values(answers).filter(answer => answer).length;
 
     if(logs) {
-      write("logs", [...logs, { id, name, correct, overall, answers, date }]
+      write("logs", [...logs, { id, name, correct, overall, answers, date }])
     }
 
     return `${correct}/${overall}`;
