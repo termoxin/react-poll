@@ -46,7 +46,7 @@ Notes:
 | --------- | :----: | :----------- | :-------------------------------------------------------------------------------------------- |
 | questions | Array  |              | These are questions to use for                                                                |
 | type      | string | arrows, fill | Poll type `fill` or `arrows`                                                                  |
-| name      | string |              | A name to showing in logs (after each a completed poll, component create a log in locaStorage |
+| name      | string |              | A name to showing in logs (after each a completed poll, component creates a log in locaStorage |
 
 Data structure for questions:
 

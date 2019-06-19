@@ -54,7 +54,7 @@ interface Props {
 
 const ListLogs: React.FunctionComponent<Props> = ({ logs }) => (
   <List>
-    {logs.map(({ id, name, date, correct, overall }, index) => (
+    {(logs || []).map(({ id, name, date, correct, overall }, index) => (
       <ListItem key={id}>
         <Id>{index + 1}.</Id>
         <Name>{name}</Name>
