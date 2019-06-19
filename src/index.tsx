@@ -1,3 +1,5 @@
-import Questions from "./components/Questions";
+import Poll from "./components/Questions";
+import Logs from "./components/Logs";
 
-export default Questions;
+
+export default { Poll, Logs };
