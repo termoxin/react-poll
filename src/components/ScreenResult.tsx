@@ -37,6 +37,7 @@ interface Props {
 
 const defaultProps: Props = {
   answers: {},
+  logs: false,
   name: "name_" + +new Date()
 };
 
@@ -55,12 +56,15 @@ const ScreenResult: React.FunctionComponent<Props> = ({ answers, name }) => {
     );
 
   const numberOfCorrects = (() => {
+    const { logs } = this.props;
     const id = getRandomStr(20);
     const date = new Date();
     const overall = Object.keys(answers).length;
     const correct = Object.values(answers).filter(answer => answer).length;
 
-    write("logs", [...logs, { id, name, correct, overall, answers, date }]);
+    if(logs) {
+      write("logs", [...logs, { id, name, correct, overall, answers, date }]
+    }
 
     return `${correct}/${overall}`;
   })();
