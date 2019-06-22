@@ -32,6 +32,7 @@ interface Props {
   questions: any;
   type: string;
   name: string;
+  onDone: Function;
 }
 
 interface State {
@@ -83,7 +84,7 @@ class Questions extends Component<Props, State> {
   };
 
   render() {
-    const { questions, type, name, logging } = this.props;
+    const { questions, type, name, logging, onDone } = this.props;
     const { answers, indexQuestion } = this.state;
     const length = Object.keys(answers).length;
     const qsLength = [].length || questions.length;
@@ -93,6 +94,10 @@ class Questions extends Component<Props, State> {
     }
 
     if (length === qsLength) {
+      if(onDone) {
+        onDone();
+      }
+
       return <ScreenResult answers={answers} logging={logging} />;
     }
 
