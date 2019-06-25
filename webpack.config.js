@@ -4,11 +4,11 @@ const HTMLWebpackPlugin = require("html-webpack-plugin");
 
 const dev = process.env.NODE_ENV !== "production";
 
-const HTMLWebpackPluginConfig = new HTMLWebpackPlugin({
-  template: path.join(__dirname, "/src/index.html"),
-  filename: "index.html",
-  inject: "body"
-});
+// const HTMLWebpackPluginConfig = new HTMLWebpackPlugin({
+//   template: path.join(__dirname, "/src/index.html"),
+//   filename: "index.html",
+//   inject: "body"
+// });
 
 const DefinePluginConfig = new webpack.DefinePlugin({
   "process.env.NODE_ENV": JSON.stringify("production")
@@ -37,7 +37,7 @@ module.exports = {
         exclude: /node_modules/,
         loaders: ["babel-loader"]
       },
-      { test: /\.tsx?$/, loader: "awesome-typescript-loader" },
+      { test: /\.tsx?$/, loader: "ts-loader" },
       {
         test: /\.s(a|c)ss$/,
         loader: "style-loader!css-loader!sass-loader"
@@ -56,7 +56,7 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: [".js", ".jsx", ".tsx", ".ts"]
+    extensions: [".js", ".jsx", ".ts", ".tsx"]
   },
   output: {
     filename: "index.js",
@@ -64,6 +64,6 @@ module.exports = {
   },
   mode: dev ? "development" : "production",
   plugins: dev
-    ? [HTMLWebpackPluginConfig, new webpack.HotModuleReplacementPlugin()]
-    : [HTMLWebpackPluginConfig, DefinePluginConfig]
+    ? [new webpack.HotModuleReplacementPlugin()]
+    : [DefinePluginConfig]
 };

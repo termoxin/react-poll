@@ -64,7 +64,6 @@ var ScreenResult = function (_a) {
         var overall = Object.keys(answers).length;
         var correct = Object.values(answers).filter(function (answer) { return answer; }).length;
         if (logging) {
-            
             store_1.write("logs", __spread(logs, [{ id: id, name: name, correct: correct, overall: overall, answers: answers, date: date }]));
         }
         return correct + "/" + overall;

@@ -36,8 +36,6 @@ const CardTextID = styled.span`
 
 const CardTextP = styled.p``;
 
-Button.displayName = "Button";
-
 interface Props {
   answers: Array<object>;
   correctAnswer: string;

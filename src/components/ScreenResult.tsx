@@ -1,9 +1,10 @@
 import React, { Fragment } from "react";
 import styled from "styled-components";
 import { Icon, Card, List } from "semantic-ui-react";
-import { write, read } from "../helpers/store";
-import { getRandomStr } from "../helpers/string";
-import { dateToStr } from "../helpers/date";
+import { write, read } from "../helpers/store.ts";
+import { getRandomStr } from "../helpers/string.ts";
+import { dateToStr } from "../helpers/date.ts";
+import { IAnswers } from "../models/Answers";
 
 const StyledCard = styled(Card)`
   && {
@@ -31,7 +32,7 @@ const ResultItem = styled.h1`
 `;
 
 interface Props {
-  answers: object;
+  answers: IAnswers;
   name: string;
   logging: boolean;
 }
@@ -42,7 +43,7 @@ const defaultProps: Props = {
   name: "name_" + +new Date()
 };
 
-const ScreenResult: React.FunctionComponent<Props> = ({ answers, name, logging }) => {
+const ScreenResult: React.FC<Props> = ({ answers, name, logging }) => {
   let logs = read("logs");
 
   if (!logs) {
@@ -62,19 +63,19 @@ const ScreenResult: React.FunctionComponent<Props> = ({ answers, name, logging }
     const overall = Object.keys(answers).length;
     const correct = Object.values(answers).filter(answer => answer).length;
 
-    if(logging) {
-      write("logs", [...logs, { id, name, correct, overall, answers, date }])
+    if (logging) {
+      write("logs", [...logs, { id, name, correct, overall, answers, date }]);
     }
 
     return `${correct}/${overall}`;
   })();
 
   return (
-    <Fragment>
+    <>
       <StyledCard>
         <Card.Header>
           <ResultItem>{numberOfCorrects}</ResultItem>
-          <DateItem>{dateToStr(new Date())}</DateItem>
+          <DateItem>{dateToStr(+new Date())}</DateItem>
         </Card.Header>
         <Card.Content>
           <List>
@@ -86,7 +87,7 @@ const ScreenResult: React.FunctionComponent<Props> = ({ answers, name, logging }
           </List>
         </Card.Content>
       </StyledCard>
-    </Fragment>
+    </>
   );
 };
 

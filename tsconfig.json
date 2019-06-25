@@ -4,6 +4,7 @@
     "esModuleInterop": true,
     "target": "es5",
     "noImplicitAny": false,
+    "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "outDir": "build",
     "baseUrl": ".",

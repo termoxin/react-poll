@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Question from "./Question";
 import ScreenResult from "./ScreenResult";
 import { QUESTIONS_TYPES } from "../constants";
+import { IAnswers } from "../models/Answers";
 
 const Container = styled.div`
   display: flex;
@@ -18,7 +19,7 @@ const Arrow = styled(Icon)`
   }
 `;
 
-interface QuestionProps {
+interface IQuestionProps {
   answers: Array<object>;
   correctAnswer: string;
   id: number | string;
@@ -28,25 +29,26 @@ interface QuestionProps {
   handleChange: Function;
 }
 
-interface Props {
+interface IQuestionsProps {
   questions: any;
   type: string;
+  logging: boolean;
   name: string;
   onDone: Function;
 }
 
 interface State {
-  answers: object;
+  answers: IAnswers;
   indexQuestion: number;
 }
 
-class Questions extends Component<Props, State> {
-  static defaultProps: { type: string; questions: any } = {
+class Questions extends Component<IQuestionsProps, State> {
+  static defaultProps: { type: string; questions: IQuestionProps[] } = {
     type: "list",
     questions: []
   };
 
-  constructor(props: Props) {
+  constructor(props: IQuestionsProps) {
     super(props);
 
     this.state = {
@@ -94,11 +96,11 @@ class Questions extends Component<Props, State> {
     }
 
     if (length === qsLength) {
-      if(onDone) {
+      if (onDone) {
         onDone();
       }
 
-      return <ScreenResult answers={answers} logging={logging} />;
+      return <ScreenResult answers={answers} logging={logging} name={name} />;
     }
 
     if (qsLength && type === QUESTIONS_TYPES.LIST) {
@@ -106,7 +108,7 @@ class Questions extends Component<Props, State> {
 
       return (
         <>
-          {qs.map((q: QuestionProps) => (
+          {qs.map((q: IQuestionProps) => (
             <Question
               key={q.id}
               handleChecking={this.handleChecking}
@@ -119,7 +121,7 @@ class Questions extends Component<Props, State> {
     }
 
     if (qsLength && type === QUESTIONS_TYPES.ARROWS) {
-      const currectQuestion: QuestionProps = questions[indexQuestion];
+      const currectQuestion: IQuestionProps = questions[indexQuestion];
 
       return (
         <Container key={currectQuestion.id}>

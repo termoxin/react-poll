@@ -95,7 +95,6 @@ var Questions = /** @class */ (function (_super) {
             if (onDone) {
                 onDone();
             }
-            
             return react_1.default.createElement(ScreenResult_1.default, { answers: answers, logging: logging });
         }
         if (qsLength && type === constants_1.QUESTIONS_TYPES.LIST) {

@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Form, Checkbox } from "semantic-ui-react";
+import { IAnswer } from "../models/Answer";
 
 const StyledCheckbox = styled(Checkbox)`
   /* && label {
@@ -8,8 +9,8 @@ const StyledCheckbox = styled(Checkbox)`
   } */
 `;
 
-interface Props {
-  answers: Array<object>;
+interface IChecksProps {
+  answers: IAnswer[];
   value: object;
   handleChange: Function;
   status: boolean | string;
@@ -17,12 +18,7 @@ interface Props {
   disabled: boolean;
 }
 
-interface AnswerProps {
-  id: number;
-  text: string;
-}
-
-const Checks: React.FunctionComponent<Props> = ({
+const Checks: React.SFC<IChecksProps> = ({
   answers,
   value,
   handleChange,
@@ -31,7 +27,7 @@ const Checks: React.FunctionComponent<Props> = ({
   disabled
 }) => (
   <>
-    {answers.map((answer: AnswerProps) => (
+    {answers.map((answer: IAnswer) => (
       <Form.Field key={answer.id}>
         <StyledCheckbox
           status={status && correctAnswer.indexOf(answer.text) > -1}

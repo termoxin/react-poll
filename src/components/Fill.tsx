@@ -14,11 +14,7 @@ interface Props {
   disabled: boolean;
 }
 
-const Fill: React.FunctionComponent<Props> = ({
-  handleChange,
-  status,
-  disabled
-}) => (
+const Fill: React.SFC<Props> = ({ handleChange, status, disabled }) => (
   <>
     <StyledInput
       disabled={disabled}

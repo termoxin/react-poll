@@ -49,7 +49,7 @@ interface Log {
 }
 
 interface Props {
-  logs: Array<Log>;
+  logs: Log[];
 }
 
 const ListLogs: React.FunctionComponent<Props> = ({ logs }) => (
@@ -61,7 +61,7 @@ const ListLogs: React.FunctionComponent<Props> = ({ logs }) => (
         <Correct>
           {correct}/<Overall>{overall}</Overall>
         </Correct>
-        <Date>{dateToStr(date)}</Date>
+        <Date>{dateToStr(+date)}</Date>
       </ListItem>
     ))}
   </List>
